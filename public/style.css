@@ -1,0 +1,10 @@
+body{
+    background-color: rgb(138, 229, 199);
+}
+
+strong{
+    text-transform: capitalize;
+    color: firebrick;
+    font-style: italic;
+    margin-right: 10px;
+}
