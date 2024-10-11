@@ -1,8 +1,12 @@
-body{
+body {
     background-color: rgb(138, 229, 199);
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
-strong{
+strong {
     text-transform: capitalize;
     color: firebrick;
     font-style: italic;
@@ -11,21 +15,21 @@ strong{
     font-size: 1.2em;
 }
 
-li{
+li {
     font-size: 15px;
     list-style: none;
 }
 
-.navbar{
+.navbar {
     background-color: rgb(255, 127, 80);
 }
 
-.nav-link{
+.nav-link {
     text-transform: capitalize;
     font-style: italic;
 }
 
-.navbar-brand{
+.navbar-brand {
     animation: forwardsAndBack infinite 4s ease-in-out;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-style: italic;
@@ -36,9 +40,45 @@ li{
         transform: translateX(0);
     }
     50% {
-        transform: translateX(10px); /* Move to the right */
+        transform: translateX(10px);
     }
     100% {
-        transform: translateX(0); /* Move back to original position */
+        transform: translateX(0);
+    }
+}
+
+a {
+    text-decoration: none;
+}
+
+.copy-btn {
+    margin-left: 1.2em;
+}
+
+.bi-clipboard {
+    font-size: 1em;
+    transition: font-size 0.2s ease;
+}
+
+.bi-clipboard:hover {
+    font-size: 1.5em;
+    color: red;
+}
+
+.footer {
+    margin-top: auto; /* Push footer to the bottom */
+    background-color: rgb(255, 127, 80); /* Change as needed */
+}
+
+.footer .bi{
+    margin-left: 1.2em;
+    font-size: 1.4em;
+}
+
+@media (max-width: 780px) {
+    .list-unstyled {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center items horizontally */
     }
 }

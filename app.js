@@ -12,6 +12,7 @@ const passport = require('passport');
 const logout = require('./route/logout');
 const LocalStrategy = require('passport-local').Strategy;
 
+
 const app = express(); 
 
 // Connect to MongoDB

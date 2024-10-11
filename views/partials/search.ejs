@@ -1,8 +1,5 @@
 <div class="row d-flex flex-column">
-    <div class="col-md-6 mx-auto m-3">
-        <h2 class="text-center">Password Manager</h2>
-    </div>
-    <div class="col-10 col-md-4 mx-auto">
+    <div class="col-10 col-md-4 mx-auto mt-5">
         <form action="/search" method="get">
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="floatingInput" placeholder="example.com" name="website" required>
@@ -25,24 +22,6 @@
                         <a href="/login"><em>Sign in to view the password</em></a>
                     <% } %>
                 </p>
-            </div>
-        </div>
-    <% } %>
-
-    <!-- Display all passwords data if available -->
-    <% if (data.length > 0) { %>
-        <div class="col-10 col-md-6 mx-auto mt-3">
-            <div class="text-center">
-                <h4>All Stored Passwords:</h4>
-                <% data.forEach(password => { %>
-                    <p><strong><%= password.website %>:</strong>
-                        <% if (SignedIn) { %> <!-- Show password if authenticated -->
-                            <%= password.password %>
-                        <% } else { %> <!-- Hide password if not authenticated -->
-                            <a href="/login"><em>Sign in to view the password</em></a>
-                        <% } %>
-                    </p>
-                <% }) %>
             </div>
         </div>
     <% } %>
