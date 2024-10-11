@@ -7,4 +7,38 @@ strong{
     color: firebrick;
     font-style: italic;
     margin-right: 10px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 1.2em;
+}
+
+li{
+    font-size: 15px;
+    list-style: none;
+}
+
+.navbar{
+    background-color: rgb(255, 127, 80);
+}
+
+.nav-link{
+    text-transform: capitalize;
+    font-style: italic;
+}
+
+.navbar-brand{
+    animation: forwardsAndBack infinite 4s ease-in-out;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-style: italic;
+}
+
+@keyframes forwardsAndBack {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(10px); /* Move to the right */
+    }
+    100% {
+        transform: translateX(0); /* Move back to original position */
+    }
 }
