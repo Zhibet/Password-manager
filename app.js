@@ -1,7 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const homeRoute = require('./route/home');
-const loginRoute = require('./route/login')
+const loginRoute = require('./route/login');
+const logoutRoute = require('./route/logout'); // Import the logout route
 const ejs = require('ejs');
 const engine = require('ejs-mate');
 const bodyParser = require('body-parser');
@@ -9,28 +10,52 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const User = require('./models/user'); 
 const passport = require('passport');
-const logout = require('./route/logout');
+const createRoute = require('./route/create'); 
 const LocalStrategy = require('passport-local').Strategy;
-
 
 const app = express(); 
 
-// Connect to MongoDB
 mongoose.connect('mongodb://127.0.0.1:27017/password-manager')
     .then(() => { console.log('The database is live'); })
     .catch(err => console.error('Database connection error:', err));
 
-// Static files and view engine configuration
+// Middleware to reset session expiration
+const resetSessionTimer = (req, res, next) => {
+    if (req.isAuthenticated()) {
+        req.session.lastActivity = Date.now(); // Track last activity time
+    }
+    next();
+};
+
+// Middleware for automatic logout
+const autoLogout = (req, res, next) => {
+    if (req.isAuthenticated() && req.session.lastActivity) {
+        const now = Date.now();
+        const inactivityTime = now - req.session.lastActivity;
+
+        if (inactivityTime > 5 * 60 * 1000) { // 5 minutes
+            return req.logout(err => {
+                req.session.destroy(err => {
+                    if (err) {
+                        return next(err);
+                    }
+                    res.clearCookie('token');
+                    return res.redirect('/login'); // Redirect to login page
+                });
+            });
+        }
+    }
+    next();
+};
+
 app.use(express.static('public'));
 app.engine('ejs', engine);
 app.set('views', `${__dirname}/views`); 
 app.set('view engine', 'ejs');
 
-// Body-parser configuration
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// Session configuration
 app.use(session({
     secret: 'your-secret-key',
     resave: false,
@@ -56,10 +81,14 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use(resetSessionTimer);
+app.use(autoLogout);
+
 // Routes
 app.use('/', homeRoute); 
-app.use('/',loginRoute)
-app.use('/',logout)
+app.use('/', loginRoute);
+app.use('/', logoutRoute); 
+app.use('/', createRoute); 
 
 // Starting the server
 const port = 3000;

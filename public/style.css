@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(138, 229, 199);
+    background-color: rgb(235, 252, 246);
     height: 100vh;
     width: 100%;
     display: flex;
@@ -21,7 +21,7 @@ li {
 }
 
 .navbar {
-    background-color: rgb(255, 127, 80);
+    background-color: rgb(62, 80, 102);
 }
 
 .nav-link {
@@ -67,7 +67,9 @@ a {
 
 .footer {
     margin-top: auto; /* Push footer to the bottom */
-    background-color: rgb(255, 127, 80); /* Change as needed */
+    background-color: rgb(62, 80, 102);
+    color: black;
+    text-transform: capitalize;
 }
 
 .footer .bi{
