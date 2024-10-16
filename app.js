@@ -11,6 +11,7 @@ const MongoStore = require('connect-mongo');
 const User = require('./models/user'); 
 const passport = require('passport');
 const createRoute = require('./route/create'); 
+const accountRoute = require('./route/account');
 const LocalStrategy = require('passport-local').Strategy;
 
 const app = express(); 
@@ -81,6 +82,11 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use((req, res, next) => {
+    res.locals.CurentAuth = req.session.AuthToken; 
+    next();
+});
+
 app.use(resetSessionTimer);
 app.use(autoLogout);
 
@@ -89,6 +95,7 @@ app.use('/', homeRoute);
 app.use('/', loginRoute);
 app.use('/', logoutRoute); 
 app.use('/', createRoute); 
+app.use('/', accountRoute);
 
 // Starting the server
 const port = 3000;

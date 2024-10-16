@@ -6,9 +6,9 @@ const Password = require('../models/password');
 homeRoute.get('/', async (req, res) => {
     try {
         const data = await Password.find({});
-        res.render('homepage', { passwordData: null, data });  // No passwordData on initial render
+        res.render('homepage', { passwordData: null, data });  
     } catch (error) {
-        res.status(500).send('Error retrieving data');
+        res.status(500).send(`Error retrieving data ${error}`);
     }
 });
 
@@ -17,7 +17,7 @@ homeRoute.get('/search', async (req, res) => {
     try {
         const query = req.query.website;
         const passwordData = await Password.findOne({ website: query });
-        res.render('homepage', { passwordData, data: [] });  // Render with found password
+        res.render('homepage', { passwordData, data: [] }); 
     } catch (error) {
         console.error(error);
         res.redirect('/');

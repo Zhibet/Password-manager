@@ -19,22 +19,50 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <% if (SignedIn) { %>
+                     <div class="signContainer">
                         <li class="nav-item">
                             <a class="nav-link" href="/">Home</a>
                         </li>
+                        
                         <li class="nav-item">
-                            <a class="nav-link" href="/logout">Logout</a>
+                            <a class="nav-link" href="#" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasUserMenu" aria-controls="offcanvasUserMenu">
+                                <i class="bi bi-person-circle" aria-hidden="true"></i>
+                                <span class="visually-hidden">User Menu</span>
+                            </a>
                         </li>
+                     </div>
                     <% } else { %>
+                        <!-- Login link when not signed in -->
                         <li class="nav-item">
                             <a class="nav-link" href="/login">Login</a>
                         </li>
-                    <% } %>
-                </ul>
+                    <% } %>                    
+                </ul>                                
             </div>
         </div>
     </nav>
+
+   <!-- Offcanvas for user menu -->
+<div class="offcanvas offcanvas-end m-0" tabindex="-1" id="offcanvasUserMenu" aria-labelledby="offcanvasUserMenuLabel">
+    <div class="offcanvas-header">
+        <h5 id="offcanvasUserMenuLabel" class="mb-0 text-capitalize text-center">User Menu</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/account">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
     <%- body %>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="/index.js"></script>
 </body>
