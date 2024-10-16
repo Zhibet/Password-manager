@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const homeRoute = require('./route/home');
@@ -58,7 +59,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use(session({
-    secret: 'your-secret-key',
+    secret: process.env.secretKey,
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({ 

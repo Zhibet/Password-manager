@@ -5,15 +5,15 @@
         </div>
         <div class="col-10 col-md-6 mt-3 mx-auto">
             <div class="card p-3 mb-3 text-center">
-                <h4 class="text-capitalize">Welcome<em class="text-success"> <%=accountData.user%></em></h4>
+                <h4 class="text-capitalize">Welcome, <em class="text-success"><%= accountData.user %></em></h4>
             </div>
 
             <div class="card p-3 mb-5">
                 <h4 class="text-capitalize">Auth Token</h4>
-                <p class="p-4 text-center bg-success-subtle auth-container">
-                    <%=CurentAuth%>
+                <p class="p-4 text-center bg-success-subtle auth-container" data-token>
+                    <%= CurentAuth %>
                 </p>
-                <button class="btn btn-danger copy-btn w-50 mx-auto">Copy</button>
+                <button class="btn btn-danger copy-btn-2 w-50 mx-auto">Copy</button>
             </div>
         </div>
     </div>

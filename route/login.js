@@ -22,12 +22,12 @@ loginRoute.post('/login', (req, res, next) => {
                 return next(err);
             }
 
-            const token = jwt.sign({ id: user._id }, 'your_secret_key', { expiresIn: '1h' });
+            const token = jwt.sign({ id: user._id }, process.env.secretKey, { expiresIn: '1h' });
 
             // Set token as a cookie
             res.cookie('token', token, {
-                httpOnly: true, // Prevents JavaScript from accessing the cookie
-                secure: process.env.NODE_ENV === 'production', // Set to true if using HTTPS
+                httpOnly: true, 
+                secure: process.env.NODE_ENV === 'production', 
                 maxAge: 3600000 // 1 hour
             });
 
