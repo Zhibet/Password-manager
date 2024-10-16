@@ -7,12 +7,12 @@ const auth = (req, res, next) => {
         return res.status(403).json({ error: 'No token provided' });
     }
 
-    jwt.verify(token, 'your_secret_key', (err, decoded) => {
+    jwt.verify(token, process.env.secretKey, (err, decoded) => {
         if (err) {
             return res.status(401).json({ error: 'Unauthorized' });
         }
 
-        req.userId = decoded.id; // Store user ID for later use
+        req.userId = decoded.id; 
         next();
     });
 };
