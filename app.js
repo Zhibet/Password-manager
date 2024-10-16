@@ -3,7 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const homeRoute = require('./route/home');
 const loginRoute = require('./route/login');
-const logoutRoute = require('./route/logout'); // Import the logout route
+const logoutRoute = require('./route/logout'); 
 const ejs = require('ejs');
 const engine = require('ejs-mate');
 const bodyParser = require('body-parser');
@@ -16,15 +16,14 @@ const accountRoute = require('./route/account');
 const LocalStrategy = require('passport-local').Strategy;
 
 const app = express(); 
-
-mongoose.connect('mongodb://127.0.0.1:27017/password-manager')
+mongoose.connect(process.env.atlastUrl) 
     .then(() => { console.log('The database is live'); })
     .catch(err => console.error('Database connection error:', err));
 
 // Middleware to reset session expiration
 const resetSessionTimer = (req, res, next) => {
     if (req.isAuthenticated()) {
-        req.session.lastActivity = Date.now(); // Track last activity time
+        req.session.lastActivity = Date.now(); 
     }
     next();
 };
@@ -63,8 +62,8 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({ 
-        mongoUrl: 'mongodb://127.0.0.1:27017/password-manager',
-        ttl: 5 * 60 // Session lasts 5 minutes (5 minutes * 60 seconds)
+        mongoUrl: process.env.atlastUrl,
+        ttl: 5 * 60 
     }),
     cookie: { 
         maxAge: 5 * 60 * 1000 // 5 minutes session duration

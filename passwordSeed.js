@@ -1,10 +1,9 @@
-const mongoose = require('mongoose');
+require('dotenv').config(); 
 
-// Connect to your MongoDB database
-mongoose.connect('mongodb://localhost:27017/password-manager', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
+const mongoose = require('mongoose');
+mongoose.connect(process.env.atlastUrl).then(()=>{
+    console.log('the database is connected to mongoose')
+})
 
 // Define the Password schema
 const PasswordSchema = new mongoose.Schema({
@@ -31,3 +30,4 @@ newPassword.save()
         console.error('Error saving password:', error);
         mongoose.connection.close(); // Close the connection on error
     });
+ 

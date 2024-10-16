@@ -1,5 +1,7 @@
+require('dotenv').config(); // Load environment variables
+
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://127.0.0.1:27017/password-manager')
+mongoose.connect(process.env.atlastUrl)  
     .then(() => {
         console.log('The database is live');
         addUser(); 
