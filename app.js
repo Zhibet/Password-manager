@@ -17,7 +17,6 @@ const LocalStrategy = require('passport-local').Strategy;
 
 const app = express(); 
 mongoose.connect(process.env.atlastUrl) 
-    .then(() => { console.log('The database is live'); })
     .catch(err => console.error('Database connection error:', err));
 
 // Middleware to reset session expiration
